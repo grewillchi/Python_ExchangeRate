@@ -1,0 +1,17 @@
+from bs4 import BeautifulSoup
+import re #正則表達式
+import random #亂數
+import requests
+
+URL = "https://rate.bot.com.tw/xrt?Lang=zh-TW"
+res = requests.get(URL)
+Soup = BeautifulSoup(res.text,'lxml')
+
+Currency = Soup.find('tbody')
+
+for C in Currency.find_all('tr'):
+    print(C.find('div',class_='hidden-phone print_show').text.strip() ,"\t"
+         ,C.find('td',{'data-table':'本行現金買入'}).text ,"\t"
+         ,C.find('td',{'data-table':'本行現金賣出'}).text ,"\t"
+         ,C.find('td',{'data-table':'本行即期買入'}).text ,"\t"
+         ,C.find('td',{'data-table':'本行即期賣出'}).text)
