@@ -1,0 +1,24 @@
+from selenium import webdriver
+from bs4 import BeautifulSoup
+import time
+
+browser = webdriver.Chrome()
+browser.get('https://www.superrichthailand.com/#!/en/exchange')
+browser.implicitly_wait(10) #等待加載完畢 or 最大10秒
+soup = BeautifulSoup(browser.page_source, 'html.parser')
+# soup = BeautifulSoup(browser.page_source, 'lxml')
+
+tbodys = soup.find_all('tbody',class_='ng-scope')
+
+for tbody in tbodys:
+    print(tbody.find('span',class_='ng-binding').text.strip() , "\t" ,
+          tbody.find('span',class_='text-size18 ng-binding').text ,
+          tbody.find('span',{'ng-bind':'convertDecimal(rate.rate[0].cBuying, rate.rate[0].rateDigit)'}).text ,
+          tbody.find('span',{'ng-bind':'convertDecimal(rate.rate[0].cSelling, rate.rate[0].rateDigit)'}).text)
+    for trs in tbody.find_all('tr',class_='ng-scope'):
+        print("\t" , trs.find('span',class_='text-size18 ng-binding').text ,
+          trs.find('span',{'ng-bind':'convertDecimal(rateItem.cBuying, rateItem.rateDigit)'}).text ,
+          trs.find('span',{'ng-bind':'convertDecimal(rateItem.cSelling, rateItem.rateDigit)'}).text)
+    
+time.sleep(0.2)
+browser.quit()
