@@ -1,0 +1,22 @@
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
+import re #正則表達式
+import random #亂數
+
+url = "http://www.ratchadaexchange.com/index.php"
+html = urlopen(url).read().decode('utf-8')
+soup = BeautifulSoup(html, features='lxml')
+
+Currency = soup.find('tbody')
+
+# print(soup.tbody.tr.td.h3.text)
+# print(Currency.tr.td.h3)
+a = Currency.find('tr',class_='subtable').text
+
+# print(a)
+
+for CC in Currency.find_all('tr',class_='line'):
+    print(CC.text.strip()[0:3])
+#     print(Currency.find('tr',class_='subtable').text.strip())
+    for C in Currency.find_all('tr',{'id':CC.text.strip()[0:3]}):
+        print(C.td.text.strip(),C.find('td',{'style':re.compile('width:80px;.* #009900')}).text,C.find('td',{'style':re.compile('width:80px;.* #FF0000')}).text)
