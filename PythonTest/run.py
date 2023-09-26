@@ -144,11 +144,8 @@ if __name__ == "__main__":
     name = select_exchange(i+1)
     # msg = 5*3
 
-    try:
-        sell, buy = get_exchange_rate(url[i], name)
-    except:
-        continue
-
+    sell, buy = get_exchange_rate(url[i], name)
+        
     rate['name'].append(name)
 
     if len(str(sell)) != 6:
