@@ -161,10 +161,10 @@ if __name__ == "__main__":
     for i in range(0,len(url)):
 
         
-        name = select_exchange(1)
+        name = select_exchange(i+1)
         
         try:
-            sell, buy = get_exchange_rate(url, name)
+            sell, buy = get_exchange_rate(url[i], name)
         except:
             continue
     
