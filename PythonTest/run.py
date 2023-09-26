@@ -141,10 +141,10 @@ if __name__ == "__main__":
     rate = {'name':[],'sell':[],'buy':[]}
     msg = '\nsell |\tbuy  |\tname\n'
 
-    name = select_exchange(i+1)
+    name = select_exchange(1)
     # msg = 5*3
 
-    sell, buy = get_exchange_rate(url[i], name)
+    sell, buy = get_exchange_rate(url, name)
         
     rate['name'].append(name)
 
