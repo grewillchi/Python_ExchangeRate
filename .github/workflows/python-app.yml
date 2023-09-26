@@ -38,3 +38,4 @@ jobs:
       run: python ./PythonTest/run.py
       env:
         LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+        LINE_GROUP_ID: ${{ secrets.LINE_GROUP_ID }}
