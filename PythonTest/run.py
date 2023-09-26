@@ -240,8 +240,12 @@ if __name__ == "__main__":
         except:
             continue
 
+    # 取得本機 ID & IP
+    host_name, host_ip = get_host_name_IP()
+
+    # 取得現在時間
     msg = time.strftime('%Y-%m-%d %I:%M:%S %p',time.localtime()) + '\n' + msg
-    
+
     # USER
     LineNotify(token[0], msg + '\n' + "Hostname :  " + host_name + '\n' + "IP :  " + host_ip)
     
