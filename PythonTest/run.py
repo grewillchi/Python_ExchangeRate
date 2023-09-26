@@ -197,7 +197,7 @@ if __name__ == "__main__":
 
     for i in range(0,len(url)):
 
-        if (i+1=4) or (i+1=5) or (i+1=9): continue
+        if (i+1==4) or (i+1==5) or (i+1==9): continue
         
         name = select_exchange(i+1)
         
