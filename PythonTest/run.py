@@ -252,5 +252,5 @@ if __name__ == "__main__":
     LineNotify(token[0], '\n' + time_now + '\n'+ msg + '\n' + "Hostname :  " + host_name + '\n' + "IP :  " + host_ip)
     
     # GOUPR
-    LineNotify(token[0], msg + '\n時間為查詢後電腦主機發送的時間(各換匯所資料更新依官方為準)\n以上提供資訊僅供參考，仍依現場標示匯率為準')
+    LineNotify(token[1], msg + '\n各換匯所資料更新依官方為準\n以上提供資訊僅供參考，仍依現場標示匯率為準')
     
