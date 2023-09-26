@@ -226,6 +226,8 @@ if __name__ == "__main__":
         msg = msg + str(buy).ljust(5) + '|'
         msg = msg + name[0:11] + '\n'
 
+    msg = msg + '\n'
+    
     for i in range(0,len(name_TW)):
         try:
             sell, buy = get_exchange_rate_TW(url_TW[i], name_TW[i])
@@ -244,7 +246,7 @@ if __name__ == "__main__":
     host_name, host_ip = get_host_name_IP()
 
     # 取得現在時間
-    msg = time.strftime('%Y-%m-%d %I:%M:%S %p',time.localtime()) + '\n' + msg
+    msg = '\n' + time.strftime('%Y-%m-%d %I:%M:%S %p',time.localtime()) + '\n' + msg
 
     # USER
     LineNotify(token[0], msg + '\n' + "Hostname :  " + host_name + '\n' + "IP :  " + host_ip)
