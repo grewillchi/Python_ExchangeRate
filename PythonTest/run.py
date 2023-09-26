@@ -136,34 +136,72 @@ def LineNotify(token, msg):
 if __name__ == "__main__":
     
     token = os.getenv('LINE_USER_ID')
-    url = 'https://www.superrichthailand.com/web/api/v1/rates'
+    url = [ 'https://www.superrichthailand.com/web/api/v1/rates',
+            'https://www.superrich1965.com/controllers/currency.php?method=2&value=33',
+            'https://www.grandsuperrich.com/rate_fordemo_v3.php',
+            'https://ppmoneyexchage.com/',
+            'http://siamexchange.co.th/api/web/index.php?r=v1%2Fcurrency%2Flist',
+            'https://x-one.co.th/api/ExchangeRatesContainerApi/',
+            'http://www.lindaexchange.com/EN/exchange',
+            'http://www.ratchadaexchange.com/',
+            'http://www.vasuexchange.com/',
+            'https://www.k79exchange.com/',
+            'http://www.twelvevictory.com/en/exchange',
+            'https://happyrich.co.th/Rate/GetRateService']
+    
+    url_TW = [ 'http://www.bbl.com.tw/exrate.asp',
+               'https://rate.bot.com.tw/xrt/all/day',
+               'https://www.megabank.com.tw/api/sc/RateExchange/Get_Fx_Currency']
 
+    name_TW = [ 'BangkokBank', 'TaiwanBank', 'MegaBank']
+    
     rate = {'name':[],'sell':[],'buy':[]}
     msg = '\nsell |\tbuy  |\tname\n'
 
-    name = select_exchange(1)
-    # msg = 5*3
+    for i in range(0,len(url)):
 
-    sell, buy = get_exchange_rate(url, name)
         
-    rate['name'].append(name)
+        name = select_exchange(1)
+        
+        try:
+            sell, buy = get_exchange_rate(url, name)
+        except:
+            continue
+    
+        rate['name'].append(name)
 
-    if len(str(sell)) != 6:
-        if len(str(sell)) == 4:
-            sell = str(sell) + '0'
-    if len(str(sell)) == 3:
-        sell = str(sell) + '00'
-    if len(str(buy)) != 6:
-        if len(str(buy)) == 4:
-            buy = str(buy) + '0'
-    if len(str(buy)) == 3:
-        buy = str(buy) + '00'
+        if len(str(sell)) != 6:
+            if len(str(sell)) == 4:
+                sell = str(sell) + '0'
+        if len(str(sell)) == 3:
+            sell = str(sell) + '00'
+        if len(str(buy)) != 6:
+            if len(str(buy)) == 4:
+                buy = str(buy) + '0'
+        if len(str(buy)) == 3:
+            buy = str(buy) + '00'
 
-    rate['sell'].append(sell)
-    rate['buy'].append(buy)
+        rate['sell'].append(sell)
+        rate['buy'].append(buy)
 
-    msg = msg + str(sell).ljust(5) + '|'
-    msg = msg + str(buy).ljust(5) + '|'
-    msg = msg + name[0:11] + '\n'
+        msg = msg + str(sell).ljust(5) + '|'
+        msg = msg + str(buy).ljust(5) + '|'
+        msg = msg + name[0:11] + '\n'
 
+    for i in range(0,len(name_TW)):
+        try:
+            sell, buy = get_exchange_rate_TW(url_TW[i], name_TW[i])
+
+            rate['name'].append(name_TW[i])
+            rate['sell'].append(sell)
+            rate['buy'].append(buy)
+
+            # Exchange_log(name_TW[i], sell, buy)
+
+            msg = msg + str(sell).ljust(5) + '|'
+            msg = msg + str(buy).ljust(5) + '|'
+            msg = msg + name_TW[i][0:11] + '\n'
+        except:
+            continue
+    
     LineNotify(token, msg)
