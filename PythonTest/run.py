@@ -246,11 +246,11 @@ if __name__ == "__main__":
     host_name, host_ip = get_host_name_IP()
 
     # 取得現在時間
-    msg = '\n' + time.strftime('%Y-%m-%d %I:%M:%S %p',time.localtime()) + '\n' + msg
+    time_now = time.strftime('%Y-%m-%d %I:%M:%S %p',time.localtime())
 
     # USER
-    LineNotify(token[0], msg + '\n' + "Hostname :  " + host_name + '\n' + "IP :  " + host_ip)
+    LineNotify(token[0], '\n' + time_now + '\n'+ msg + '\n' + "Hostname :  " + host_name + '\n' + "IP :  " + host_ip)
     
     # GOUPR
-    # LineNotify(token[1], msg + '\n時間為查詢後電腦主機發送的時間(各換匯所資料更新依官方為準)\n以上提供資訊僅供參考，仍依現場標示匯率為準')
+    LineNotify(token[0], msg + '\n時間為查詢後電腦主機發送的時間(各換匯所資料更新依官方為準)\n以上提供資訊僅供參考，仍依現場標示匯率為準')
     
