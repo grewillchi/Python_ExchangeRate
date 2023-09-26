@@ -32,6 +32,6 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Run Python python-app
-      run: python run.py
+      run: python ./PythonTest/run.py
       #env:
         #LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
