@@ -1,6 +1,8 @@
 import requests
 import os
 import json
+import socket
+import time
 from bs4 import BeautifulSoup
 from linebot.models import TextSendMessage
 from linebot import (
@@ -84,6 +86,32 @@ def get_exchange_rate(url, name):
 
   return Selling, Buying
 
+def get_exchange_rate_TW(url, name):
+    if name == 'MegaBank':
+        # 使用 requests 套件 post 方法訪問網站
+        res = requests.post(url, headers = header)
+        # 使用 json 套件，載入 json 格式資料存入 json_rate
+        json_Mega = json.loads(res.text)['appRepBody']['exchangeRates'][10]
+        Selling = str(1/float(json_Mega['cashExchangeRate']['buy']))[0:5]
+        Buying = str(1/float(json_Mega['cashExchangeRate']['sale']))[0:5]
+
+    elif name == 'TaiwanBank' or name == 'BangkokBank':
+        # 使用 requests 套件 get 方法訪問網站
+        res = requests.get(url, headers = header)
+        res.encoding = 'Big5'
+        # 使用 BeautifulSoup 解析
+        soup = BeautifulSoup(res.text, 'html.parser')
+    if name == 'BangkokBank':
+        soup_Bangkok = soup.find_all('tr')[4].find_all('td')
+        Selling = str(1/float(soup_Bangkok[1].text))[0:5]
+        Buying = str(1/float(soup_Bangkok[2].text))[0:5]
+    elif name == 'TaiwanBank':
+        soup_TWB = soup.find('table').find('tbody').find_all('tr')[11].find_all('td')
+        Selling = str(1/float(soup_TWB[1].text))[0:5]
+        Buying = str(1/float(soup_TWB[2].text))[0:5]
+
+    return Selling, Buying
+
 def select_exchange(n=0):
   # 輸入換匯所編號
   # number = 0
@@ -133,9 +161,18 @@ def LineNotify(token, msg):
     # image = {'imageFile': file}
     r = requests.post("https://notify-api.line.me/api/notify", headers=headers, params=params)#, files = image)
 
+# 取得本機 ID & IP
+def get_host_name_IP():
+    try:
+        host_name = socket.gethostname()
+        host_ip = socket.gethostbyname(host_name)
+        return host_name, host_ip
+    except:
+        print("Unable to get Hostname and IP")
+
 if __name__ == "__main__":
     
-    token = os.getenv('LINE_USER_ID')
+    token = [os.getenv('LINE_USER_ID'), os.getenv('LINE_GROUP_ID')]
     url = [ 'https://www.superrichthailand.com/web/api/v1/rates',
             'https://www.superrich1965.com/controllers/currency.php?method=2&value=33',
             'https://www.grandsuperrich.com/rate_fordemo_v3.php',
@@ -160,6 +197,7 @@ if __name__ == "__main__":
 
     for i in range(0,len(url)):
 
+        if i+1 = 4 or i+1 = 5 or i+1 = 9: continue
         
         name = select_exchange(i+1)
         
@@ -196,12 +234,17 @@ if __name__ == "__main__":
             rate['sell'].append(sell)
             rate['buy'].append(buy)
 
-            # Exchange_log(name_TW[i], sell, buy)
-
             msg = msg + str(sell).ljust(5) + '|'
             msg = msg + str(buy).ljust(5) + '|'
             msg = msg + name_TW[i][0:11] + '\n'
         except:
             continue
+
+    msg = time.strftime('%Y-%m-%d %I:%M:%S %p',time.localtime()) + '\n' + msg
     
-    LineNotify(token, msg)
+    # USER
+    LineNotify(token[0], msg + '\n' + "Hostname :  " + host_name + '\n' + "IP :  " + host_ip)
+    
+    # GOUPR
+    # LineNotify(token[1], msg + '\n時間為查詢後電腦主機發送的時間(各換匯所資料更新依官方為準)\n以上提供資訊僅供參考，仍依現場標示匯率為準')
+    
