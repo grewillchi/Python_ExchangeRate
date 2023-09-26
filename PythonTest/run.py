@@ -1,4 +1,5 @@
 import requests
+import os
 from linebot.models import TextSendMessage
 from linebot import (
     LineBotApi, WebhookHandler
@@ -16,7 +17,7 @@ def LineNotify(token, msg):
     # image = {'imageFile': file}
     r = requests.post("https://notify-api.line.me/api/notify", headers=headers, params=params)#, files = image)
 
-token = 'LINE_USER_ID'
+token = os.getenv('LINE_USER_ID')
 msg = 5*3
 
 if __name__ == "__main__":
