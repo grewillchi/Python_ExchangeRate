@@ -33,5 +33,5 @@ jobs:
 
     - name: Run Python python-app
       run: python run.py
-      env:
-        LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+      #env:
+        #LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
