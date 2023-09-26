@@ -172,7 +172,6 @@ def get_host_name_IP():
 
 if __name__ == "__main__":
     
-    token = [os.getenv('LINE_USER_ID'), os.getenv('LINE_GROUP_ID')]
     url = [ 'https://www.superrichthailand.com/web/api/v1/rates',
             'https://www.superrich1965.com/controllers/currency.php?method=2&value=33',
             'https://www.grandsuperrich.com/rate_fordemo_v3.php',
@@ -248,9 +247,11 @@ if __name__ == "__main__":
     # 取得現在時間
     time_now = time.strftime('%Y-%m-%d %I:%M:%S %p',time.localtime())
 
+    token = [os.getenv('LINE_USER_ID'), os.getenv('LINE_GROUP_ID')]
+    
     # USER
-    LineNotify(token[0], '\n' + time_now + '\n'+ msg + '\n' + "Hostname :  " + host_name + '\n' + "IP :  " + host_ip)
+    LineNotify(os.getenv('LINE_USER_ID'), '\n' + time_now + '\n'+ msg + '\n' + "Hostname :  " + host_name + '\n' + "IP :  " + host_ip)
     
     # GOUPR
-    LineNotify(token[1], msg + '\n各換匯所資料更新依官方為準\n以上提供資訊僅供參考，仍依現場標示匯率為準')
+    LineNotify(os.getenv('LINE_GROUP_ID'), msg + '\n各換匯所資料更新依官方為準\n以上提供資訊僅供參考，仍依現場標示匯率為準')
     
