@@ -35,6 +35,6 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Run Python line_shopback
-      run: python ./PythonTest/run.py
+      run: python ./PythonTest/python_line_shopeback.py
       env:
         LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
