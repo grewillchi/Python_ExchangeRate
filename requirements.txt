@@ -2,3 +2,4 @@ beautifulsoup4
 requests
 line-bot-sdk
 json
+BeautifulSoup
