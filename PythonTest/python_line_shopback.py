@@ -1,6 +1,7 @@
 #引入使用套件
 import requests
 import json
+import os
 from bs4 import BeautifulSoup
 
 # 不讓伺服器當作機器人
