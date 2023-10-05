@@ -81,5 +81,6 @@ if __name__ == "__main__":
             msg = msg
         
     # 從LINE Notify取得的權杖(token)
-    LineNotify(os.getenv('LINE_USER_ID'), msg)
+    LineNotify(os.getenv('LINE_USER_ID'), msg) # 單獨的 Line Notify
+    LineNotify(os.getenv('LINE_GROUP_SELF'), msg) # 倆人群
     
