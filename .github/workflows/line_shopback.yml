@@ -38,3 +38,4 @@ jobs:
       run: python ./PythonTest/python_line_shopback.py
       env:
         LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+        LINE_GROUP_SELF: ${{ secrets.LINE_GROUP_SELF }}
