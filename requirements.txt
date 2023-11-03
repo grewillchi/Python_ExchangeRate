@@ -1,4 +1,4 @@
 beautifulsoup4
 requests
 line-bot-sdk
-aiohttp==3.8.2
+aiohttp==3.9.0b0
