@@ -24,7 +24,7 @@ def get_exchange_rate(url, name):
   # 使用 requests 套件 get 方法訪問網站
   res = requests.get(url, headers = header)
   # 以下為 json 格式
-  if name == 'SuperRich_G' or name == 'Xone' or name == 'SiamExchange' or name == 'SuperRich_O':
+  if name == 'SuperRich_G' or name == 'Xone' or name == 'SiamExchange' or name == 'SuperRich_O' or name == 'TTExchange':
     # 使用 json 套件，載入 json 格式資料存入 json_rate
     json_rate = json.loads(res.text)
     if name == 'SuperRich_G':
@@ -39,6 +39,12 @@ def get_exchange_rate(url, name):
     elif name == 'SuperRich_O':
       Selling = json_rate[13]['sell']
       Buying = json_rate[13]['buy']
+    elif name == 'TTExchange':
+      for i in json_TT:
+        if i['name'][0:3] in currency:
+          Selling = i['current_sell_rate']
+          Buying = i['current_buy_rate']
+          break
 
   # 以下為 html 格式
   elif name == 'Ratchada' or name == 'GrandSuperRich' or name == 'k79' or name=='Linda' or name == 'P&P' or name == 'vasuexchange' or name == 'twelvevictory':
@@ -146,6 +152,8 @@ def select_exchange(n=0):
     name = 'twelvevictory'
   elif number == 12:
     name = 'Happyrich'
+  elif number == 13:
+    name = 'TTExchange'
 
   return name
 
@@ -183,7 +191,8 @@ if __name__ == "__main__":
             'http://www.vasuexchange.com/',
             'https://www.k79exchange.com/',
             'http://www.twelvevictory.com/en/exchange',
-            'https://happyrich.co.th/Rate/GetRateService']
+            'https://happyrich.co.th/Rate/GetRateService',
+            'https://api.software.ttexchange.com/currencies?is_main=false&branch_id=50' ]
     
     url_TW = [ 'http://www.bbl.com.tw/exrate.asp',
                'https://rate.bot.com.tw/xrt/all/day',
