@@ -40,7 +40,7 @@ def get_exchange_rate(url, name):
       Selling = json_rate[13]['sell']
       Buying = json_rate[13]['buy']
     elif name == 'TTExchange':
-      for i in json_TT:
+      for i in json_rate:
         if i['name'][0:3] in currency:
           Selling = i['current_sell_rate']
           Buying = i['current_buy_rate']
