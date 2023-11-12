@@ -18,6 +18,7 @@ header = {
     }
 
 param = {'Language':'TH','Location':'32'}
+currency = ['TWD']
 
 def get_exchange_rate(url, name):
 
