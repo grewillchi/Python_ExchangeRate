@@ -231,9 +231,9 @@ if __name__ == "__main__":
         rate['sell'].append(sell)
         rate['buy'].append(buy)
 
-        msg = msg + str(sell).ljust(5) + '|'
-        msg = msg + str(buy).ljust(5) + '|'
-        msg = msg + name[0:11] + '\n'
+        msg = msg + str(sell)[0:5] + '|'
+        msg = msg + str(buy)[0:5] + '|'
+        msg = msg + name + '\n' # [0:11]
 
     msg = msg + '\n'
     
@@ -245,9 +245,9 @@ if __name__ == "__main__":
             rate['sell'].append(sell)
             rate['buy'].append(buy)
 
-            msg = msg + str(sell).ljust(5) + '|'
-            msg = msg + str(buy).ljust(5) + '|'
-            msg = msg + name_TW[i][0:11] + '\n'
+            msg = msg + str(sell)[0:5] + '|'
+            msg = msg + str(buy)[0:5] + '|'
+            msg = msg + name_TW[i] + '\n' # [0:11]
         except:
             continue
 
