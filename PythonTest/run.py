@@ -79,8 +79,8 @@ def get_exchange_rate(url, name):
       Selling = soup.find_all('table',{'bgcolor':'#FFFFFF'})[15].find_all('td')[2].text.strip()
       Buying = soup.find_all('table',{'bgcolor':'#FFFFFF'})[15].find_all('td')[1].text.strip()
     elif name == 'twelvevictory':
-      Selling = soup.find('tbody',{'class':'tb-scroll'}).find_all('tr')[8].find_all('td')[3].find('div').find('h5').text.strip()
-      Buying = soup.find('tbody',{'class':'tb-scroll'}).find_all('tr')[8].find_all('td')[2].find('div').find('h5').text.strip()
+      Selling = soup.find('tbody',{'class':'tb-scroll'}).find_all('tr')[8].find_all('td')[3].find('div').find_all('h5')[1].text.strip()
+      Buying = soup.find('tbody',{'class':'tb-scroll'}).find_all('tr')[8].find_all('td')[2].find('div').find_all('h5')[1].text.strip()
 
   # 使用 post 方法， json 格式
   elif name == 'Happyrich':
