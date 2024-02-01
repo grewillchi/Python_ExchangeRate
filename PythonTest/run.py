@@ -29,8 +29,11 @@ def get_exchange_rate(url, name):
     # 使用 json 套件，載入 json 格式資料存入 json_rate
     json_rate = json.loads(res.text)
     if name == 'SuperRich_G':
-      Selling = json_rate['data']['exchangeRate'][13]['rate'][0]['cSelling']
-      Buying = json_rate['data']['exchangeRate'][13]['rate'][0]['cBuying']
+        for i in json_rate['data']['exchangeRate']:
+            if str(i['cUnit']) in currency:
+                Selling = i['rate'][0]['cSelling']
+                Buying = i['rate'][0]['cBuying']
+                break
     elif name == 'Xone':
       Selling = json_rate['ExchangeRateGroups'][11]['ExchangeRates'][0]['SellRate']
       Buying = json_rate['ExchangeRateGroups'][11]['ExchangeRates'][0]['BuyRate']
