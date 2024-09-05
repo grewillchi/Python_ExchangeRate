@@ -116,8 +116,8 @@ def get_exchange_rate_TW(url, name):
         soup = BeautifulSoup(res.text, 'html.parser')
     if name == 'BangkokBank':
         soup_Bangkok = soup.find_all('tr')[4].find_all('td')
-        Selling = str(1/float(soup_Bangkok[1].text))[0:5]
-        Buying = str(1/float(soup_Bangkok[2].text))[0:5]
+        Selling = str(1/float(soup_Bangkok[0].text))[0:5]
+        Buying = str(1/float(soup_Bangkok[1].text))[0:5]
     elif name == 'TaiwanBank':
         soup_TWB = soup.find('table').find('tbody').find_all('tr')[11].find_all('td')
         Selling = str(1/float(soup_TWB[1].text))[0:5]
