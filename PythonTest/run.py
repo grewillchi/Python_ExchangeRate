@@ -4,6 +4,7 @@ import json
 import socket
 import time
 from bs4 import BeautifulSoup
+import telebot
 from linebot.models import TextSendMessage
 from linebot import (
     LineBotApi, WebhookHandler
@@ -185,6 +186,16 @@ def get_host_name_IP():
     except:
         print("Unable to get Hostname and IP")
 
+def send_message_to_telegram(message):
+    API_TOKEN = os.getenv('TG_MYBOT_TOKEN')
+    all_id = [os.getenv('TG_BKKEXCHATID')]
+    
+    bot = telebot.TeleBot(API_TOKEN)
+    for chat_id in all_id:
+        bot.send_message(chat_id, message)
+
+#=============================================================================
+
 if __name__ == "__main__":
     
     url = [ 'https://www.superrichthailand.com/web/api/v1/rates',
@@ -270,4 +281,5 @@ if __name__ == "__main__":
     
     # GOUPR
     LineNotify(os.getenv('LINE_GROUP_ID'), msg + '\n各換匯所資料更新依官方為準\n以上提供資訊僅供參考，仍依現場標示匯率為準')
+    send_message_to_telegram(msg, '\n各換匯所資料更新依官方為準\n以上提供資訊僅供參考，仍依現場標示匯率為準')
     
