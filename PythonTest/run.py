@@ -277,7 +277,7 @@ if __name__ == "__main__":
     token = [os.getenv('LINE_USER_ID'), os.getenv('LINE_GROUP_ID')]
     
     # USER
-    LineNotify(os.getenv('LINE_USER_ID'), '\n' + time_now + '\n'+ msg + '\n' + "Hostname :  " + host_name + '\n' + "IP :  " + host_ip)
+    # LineNotify(os.getenv('LINE_USER_ID'), '\n' + time_now + '\n'+ msg + '\n' + "Hostname :  " + host_name + '\n' + "IP :  " + host_ip)
     
     # GOUPR
     LineNotify(os.getenv('LINE_GROUP_ID'), msg + '\n各換匯所資料更新依官方為準\n以上提供資訊僅供參考，仍依現場標示匯率為準')
