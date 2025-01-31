@@ -1,5 +1,5 @@
 beautifulsoup4
 requests
 line-bot-sdk
-aiohttp==3.9.0b0
+aiohttp==3.11.11
 telebot
