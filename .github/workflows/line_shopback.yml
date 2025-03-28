@@ -39,3 +39,4 @@ jobs:
       env:
         LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
         LINE_GROUP_SELF: ${{ secrets.LINE_GROUP_SELF }}
+        TG_MYBOT_TOKEN: ${{ secrets.TG_MYBOT_TOKEN }}
