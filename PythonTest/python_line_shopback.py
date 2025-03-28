@@ -4,6 +4,10 @@ import json
 import os
 from bs4 import BeautifulSoup
 import telebot
+from linebot.models import TextSendMessage
+from linebot import (
+    LineBotApi, WebhookHandler
+)
 
 # 不讓伺服器當作機器人
 header = {
@@ -43,12 +47,11 @@ def LineNotify(token, msg):
 
 def send_message_to_telegram(message):
     API_TOKEN = os.getenv('TG_MYBOT_TOKEN')
-    # all_id = [os.getenv('TG_BKKEXCHATID')]
+    all_id = [os.getenv('TG_TWOHATID')]
     
     bot = telebot.TeleBot(API_TOKEN)
-    bot.send_message(API_TOKEN, message)
-    # for chat_id in all_id:
-        # bot.send_message(chat_id, message)
+    for chat_id in all_id:
+        bot.send_message(chat_id, message)
 
 #=============================================================================
 
