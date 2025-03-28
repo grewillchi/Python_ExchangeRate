@@ -40,6 +40,17 @@ def LineNotify(token, msg):
     # image = {'imageFile': file}
     r = requests.post("https://notify-api.line.me/api/notify", headers=headers, params=params)#, files = image)
 
+def send_message_to_telegram(message):
+    API_TOKEN = os.getenv('TG_MYBOT_TOKEN')
+    # all_id = [os.getenv('TG_BKKEXCHATID')]
+    
+    bot = telebot.TeleBot(API_TOKEN)
+    bot.send_message(API_TOKEN, message)
+    # for chat_id in all_id:
+        # bot.send_message(chat_id, message)
+
+#=============================================================================
+
 # Line Notify
 if __name__ == "__main__":
     # 網址：line購物Urmart回饋
@@ -83,4 +94,4 @@ if __name__ == "__main__":
     # 從LINE Notify取得的權杖(token)
     LineNotify(os.getenv('LINE_USER_ID'), msg) # 單獨的 Line Notify
     LineNotify(os.getenv('LINE_GROUP_SELF'), msg) # 倆人群
-    
+    send_message_to_telegram(msg) # Telegram兩人群
