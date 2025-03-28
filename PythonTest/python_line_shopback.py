@@ -3,6 +3,7 @@ import requests
 import json
 import os
 from bs4 import BeautifulSoup
+import telebot
 
 # 不讓伺服器當作機器人
 header = {
