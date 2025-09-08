@@ -280,6 +280,6 @@ if __name__ == "__main__":
     # LineNotify(os.getenv('LINE_USER_ID'), '\n' + time_now + '\n'+ msg + '\n' + "Hostname :  " + host_name + '\n' + "IP :  " + host_ip)
     
     # GOUPR
-    LineNotify(os.getenv('LINE_GROUP_ID'), msg + '\n各換匯所資料更新依官方為準\n以上提供資訊僅供參考，仍依現場標示匯率為準')
+    # LineNotify(os.getenv('LINE_GROUP_ID'), msg + '\n各換匯所資料更新依官方為準\n以上提供資訊僅供參考，仍依現場標示匯率為準')
     send_message_to_telegram(msg + '\n各換匯所資料更新依官方為準\n以上提供資訊僅供參考，仍依現場標示匯率為準')
     
