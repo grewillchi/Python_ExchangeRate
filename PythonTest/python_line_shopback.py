@@ -97,7 +97,7 @@ if __name__ == "__main__":
         
     # 從LINE Notify取得的權杖(token)
     # LineNotify(os.getenv('LINE_USER_ID'), msg) # 單獨的 Line Notify
-    LineNotify(os.getenv('LINE_GROUP_SELF'), msg) # 倆人群
+    # LineNotify(os.getenv('LINE_GROUP_SELF'), msg) # 倆人群
 
     # 由 Telegram Bot 發送
     send_message_to_telegram(msg) # Telegram兩人群
